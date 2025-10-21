@@ -13,15 +13,12 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onLogin() {
-    this.authService.login(this.email, this.senha).subscribe({
-      next: () => {
-        this.router.navigate(['/home']);
-      },
-      error: err => {
-        alert('Usuário ou senha inválidos.');
-        console.error(err);
-      }
-    });
-  }
+onLogin() {
+  const user = {
+    username: this.email,
+    password: this.senha
+  };
+
+  this.authService.login(user); // ✅ sem .subscribe()
+}
 }

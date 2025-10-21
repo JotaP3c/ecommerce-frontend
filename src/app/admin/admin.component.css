@@ -1,0 +1,53 @@
+.admin-container {
+  max-width: 600px;
+  margin: 80px auto;
+  background: #0d1b2a;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
+  text-align: center;
+  color: #e0e0e0;
+}
+
+h2 {
+  color: cyan;
+  margin-bottom: 10px;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.admin-btn {
+  background: cyan;
+  color: #0d1b2a;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+.admin-btn:hover {
+  background: #00bcd4;
+}
+
+.voltar-btn {
+  background: transparent;
+  border: 1px solid cyan;
+  color: cyan;
+  margin-top: 25px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.voltar-btn:hover {
+  background: cyan;
+  color: #0d1b2a;
+}

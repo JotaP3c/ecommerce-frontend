@@ -1,4 +1,32 @@
-<h1>Bem-vindo!</h1>
-<p>Você está logado.</p>
+<div class="home-container">
+  <div class="header">
+    <h2>Catálogo de Produtos</h2>
+    <div class="actions">
+      <button class="logout-btn" (click)="logout()">Sair</button>
+    </div>
+  </div>
 
-<button (click)="logout()">Sair</button>
+  <p class="welcome-text">
+    Bem-vindo, {{ isAdmin ? 'administrador' : 'cliente' }}! Veja nossos produtos disponíveis:
+  </p>
+
+  <!-- Botões de administrador -->
+  <div class="admin-actions" *ngIf="isAdmin">
+    <button class="admin-btn" enabled>Criar Produto</button>
+    <button class="admin-btn" enabled>Editar Produto</button>
+    <button class="admin-btn" enabled>Excluir Produto</button>
+    <button class="admin-btn" (click)="router.navigate(['/admin/usuarios'])">Gerenciar Usuários</button>
+  </div>
+
+  <div class="produtos-container" *ngIf="produtos.length > 0; else semProdutos">
+    <div class="produto-card" *ngFor="let p of produtos">
+      <h3>{{ p.nome }}</h3>
+      <p>{{ p.descricao || 'Descrição indisponível' }}</p>
+      <p class="preco">Preço: <strong>R$ {{ p.preco }}</strong></p>
+    </div>
+  </div>
+
+  <ng-template #semProdutos>
+    <p class="no-products">Nenhum produto disponível.</p>
+  </ng-template>
+</div>

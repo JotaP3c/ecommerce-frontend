@@ -1,0 +1,54 @@
+<div class="container">
+  <h2>Gerenciamento de Usuários</h2>
+
+  <div class="search-bar">
+    <input [(ngModel)]="termoBusca" placeholder="Digite o termo de busca" />
+    <select [(ngModel)]="filtroTipo">
+      <option value="nome">Nome</option>
+      <option value="email">Email</option>
+      <option value="id">ID</option>
+      <option value="perfil">Perfil (true/false)</option>
+    </select>
+    <button (click)="buscar()">Buscar</button>
+    <button class="btn-voltar" (click)="voltar()">Voltar</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Perfil</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <td>{{ usuario.id }}</td>
+        <td>{{ usuario.nome }}</td>
+        <td>{{ usuario.email }}</td>
+        <td>{{ usuario.perfil ? 'Admin' : 'Cliente' }}</td>
+        <td>
+          <button (click)="editarUsuario(usuario)">Editar</button>
+          <button (click)="desativarUsuario(usuario.id)" class="danger">Desativar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="editando" class="modal">
+    <h3>Editar Usuário</h3>
+    <label>Nome</label>
+    <input [(ngModel)]="editando.nome" />
+    <label>Email</label>
+    <input [(ngModel)]="editando.email" />
+    <label>Perfil</label>
+    <select [(ngModel)]="editando.perfil">
+      <option [value]="true">Admin</option>
+      <option [value]="false">Cliente</option>
+    </select>
+    <button (click)="salvarEdicao()">Salvar</button>
+    <button (click)="editando = null">Cancelar</button>
+  </div>
+</div>
