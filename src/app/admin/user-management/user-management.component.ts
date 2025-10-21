@@ -30,6 +30,10 @@ export class UserManagementComponent implements OnInit {
     });
   }
 
+  irParaCriarUsuario() {
+  this.router.navigate(['/admin/usuarios/novo']);
+}
+
   buscar() {
     if (!this.termoBusca) return this.listarTodos();
 

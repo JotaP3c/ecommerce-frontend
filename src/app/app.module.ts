@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminComponent } from './admin/admin.component';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { CriarUsuarioComponent } from './admin/criar-usuario/criar-usuario.component';
 
 
 
@@ -18,7 +19,8 @@ import { UserManagementComponent } from './admin/user-management/user-management
     LoginComponent,
     HomeComponent,
     AdminComponent,
-    UserManagementComponent
+    UserManagementComponent,
+    CriarUsuarioComponent,
   ],
   imports: [
     BrowserModule,

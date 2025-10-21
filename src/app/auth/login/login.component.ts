@@ -13,12 +13,29 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-onLogin() {
-  const user = {
-    username: this.email,
-    password: this.senha
-  };
+  onLogin() {
+    if (!this.email || !this.senha) {
+      alert('Por favor, preencha o e-mail e a senha.');
+      return;
+    }
 
-  this.authService.login(user); // ✅ sem .subscribe()
-}
+    const user = {
+      username: this.email,
+      password: this.senha
+    };
+
+    this.authService.login(user).subscribe({
+      next: (res) => {
+        if (!res.ativo) {
+          alert('Usuário inativo. Contate o administrador.');
+          return;
+        }
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        console.error('Erro no login:', err);
+        alert('Usuário ou senha inválidos!');
+      }
+    });
+  }
 }

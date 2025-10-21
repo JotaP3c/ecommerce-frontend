@@ -42,7 +42,15 @@ export class UserService {
     return this.http.put<any>(`${this.apiUrl}/${id}`, usuario, { headers: this.getHeaders() });
   }
 
-  desativar(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
+  desativar(id: number): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}/desativar`, {}, { headers: this.getHeaders() });
   }
+
+  ativar(id: number): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}/ativar`, {}, { headers: this.getHeaders() });
+  }
+
+  criar(usuario: any): Observable<any> {
+  return this.http.post<any>(this.apiUrl, usuario, { headers: this.getHeaders() });
+}
 }

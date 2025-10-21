@@ -1,0 +1,24 @@
+.form-container {
+  background-color: #0f2027;
+  padding: 20px;
+  border-radius: 12px;
+  color: white;
+  width: 60%;
+  margin: 20px auto;
+  border: 1px solid cyan;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+input, select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+}
+
+button {
+  margin-right: 10px;
+}
