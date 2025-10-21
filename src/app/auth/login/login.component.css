@@ -83,3 +83,10 @@ p {
     padding: 30px 20px;
   }
 }
+
+.erro {
+  color: #ff5252;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: 500;
+}

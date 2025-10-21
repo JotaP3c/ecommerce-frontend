@@ -1,63 +1,122 @@
 .container {
-  max-width: 900px;
+  max-width: 950px;
   margin: 40px auto;
-  padding: 20px;
+  padding: 25px;
   background: #0d1b2a;
-  border-radius: 12px;
+  border-radius: 16px;
   color: #e0e0e0;
-  box-shadow: 0 0 12px rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.25);
+  font-family: 'Segoe UI', sans-serif;
 }
 
 h2 {
   color: cyan;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
 .search-bar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 25px;
 }
 
 input, select {
-  padding: 8px;
+  padding: 8px 12px;
   border-radius: 6px;
   border: 1px solid cyan;
   background: #1b263b;
   color: #e0e0e0;
+  font-size: 14px;
+  transition: border 0.2s, background 0.2s;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #00bcd4;
+  background: #16213e;
 }
 
 button {
-  padding: 8px 16px;
+  padding: 8px 18px;
   border: none;
   border-radius: 6px;
-  background: cyan;
-  color: #0d1b2a;
   cursor: pointer;
-  transition: 0.3s;
+  font-weight: 500;
+  font-size: 14px;
+  transition: 0.3s ease;
 }
 
 button:hover {
+  transform: scale(1.03);
+}
+
+.btn-voltar {
+  background: #607d8b;
+  color: white;
+}
+
+.btn-success {
+  background: #00e676;
+  color: #0d1b2a;
+}
+
+.btn-success:hover {
+  background: #00c853;
+}
+
+.btn-danger {
+  background: #ff5252;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #ff1744;
+}
+
+.btn-info {
+  background: cyan;
+  color: #0d1b2a;
+}
+
+.btn-info:hover {
   background: #00bcd4;
 }
 
-button.danger {
-  background: #ff5252;
-  color: white;
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 th, td {
-  border-bottom: 1px solid cyan;
-  padding: 8px;
+  padding: 10px 12px;
   text-align: left;
+  border-bottom: 1px solid cyan;
+}
+
+th {
+  color: cyan;
+  font-weight: 600;
+}
+
+tr:hover {
+  background: rgba(0, 255, 255, 0.05);
+}
+
+tr.inativo {
+  opacity: 0.6;
+  background-color: #1a1a1a;
 }
 
 .modal {
@@ -66,5 +125,10 @@ th, td {
   border: 1px solid cyan;
   border-radius: 10px;
   background: #1b263b;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
 }
 
+.modal h3 {
+  color: cyan;
+  margin-bottom: 15px;
+}

@@ -13,28 +13,30 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onLogin() {
-    if (!this.email || !this.senha) {
-      alert('Por favor, preencha o e-mail e a senha.');
-      return;
-    }
+mensagemErro: string = '';
 
+ onLogin() {
     const user = {
       username: this.email,
       password: this.senha
     };
 
     this.authService.login(user).subscribe({
-      next: (res) => {
-        if (!res.ativo) {
-          alert('Usuário inativo. Contate o administrador.');
-          return;
-        }
+      next: (res: any) => {
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('nome', res.nome);
+        localStorage.setItem('email', res.email);
+        localStorage.setItem('perfil', String(res.perfil));
         this.router.navigate(['/home']);
       },
       error: (err) => {
-        console.error('Erro no login:', err);
-        alert('Usuário ou senha inválidos!');
+        console.error('Erro ao fazer login:', err);
+
+        if (err.error?.error === 'Usuário inativo!') {
+          this.mensagemErro = 'Usuário inativo! Entre em contato com o administrador.';
+        } else {
+          this.mensagemErro = 'Usuário ou senha inválidos!';
+        }
       }
     });
   }

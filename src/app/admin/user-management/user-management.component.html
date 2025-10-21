@@ -9,11 +9,9 @@
       <option value="id">ID</option>
       <option value="perfil">Perfil (true/false)</option>
     </select>
-    <button (click)="buscar()">Buscar</button>
+    <button class="btn-info" (click)="buscar()">Buscar</button>
     <button class="btn-voltar" (click)="voltar()">Voltar</button>
-    <div class="actions">
-  <button class="btn btn-success" (click)="irParaCriarUsuario()">Criar Usuário</button>
-</div>
+    <button class="btn-success" (click)="irParaCriarUsuario()">Criar Usuário</button>
   </div>
 
   <table>
@@ -23,18 +21,27 @@
         <th>Nome</th>
         <th>Email</th>
         <th>Perfil</th>
+        <th>Status</th>
         <th>Ações</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let usuario of usuarios">
+      <tr *ngFor="let usuario of usuarios" [ngClass]="{'inativo': !usuario.ativo}">
         <td>{{ usuario.id }}</td>
         <td>{{ usuario.nome }}</td>
         <td>{{ usuario.email }}</td>
         <td>{{ usuario.perfil ? 'Admin' : 'Cliente' }}</td>
+        <td>{{ usuario.ativo ? 'Ativo' : 'Inativo' }}</td>
         <td>
-          <button (click)="editarUsuario(usuario)">Editar</button>
-          <button (click)="desativarUsuario(usuario.id)" class="danger">Desativar</button>
+          <button class="btn-info" (click)="editarUsuario(usuario)">Editar</button>
+
+          <button *ngIf="usuario.ativo" class="btn-danger" (click)="desativarUsuario(usuario.id)">
+            Desativar
+          </button>
+
+          <button *ngIf="!usuario.ativo" class="btn-success" (click)="ativarUsuario(usuario.id)">
+            Ativar
+          </button>
         </td>
       </tr>
     </tbody>
@@ -42,16 +49,28 @@
 
   <div *ngIf="editando" class="modal">
     <h3>Editar Usuário</h3>
-    <label>Nome</label>
-    <input [(ngModel)]="editando.nome" />
-    <label>Email</label>
-    <input [(ngModel)]="editando.email" />
-    <label>Perfil</label>
-    <select [(ngModel)]="editando.perfil">
-      <option [value]="true">Admin</option>
-      <option [value]="false">Cliente</option>
-    </select>
-    <button (click)="salvarEdicao()">Salvar</button>
-    <button (click)="editando = null">Cancelar</button>
+
+    <div class="form-group">
+      <label>Nome</label>
+      <input [(ngModel)]="editando.nome" />
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input [(ngModel)]="editando.email" />
+    </div>
+
+    <div class="form-group">
+      <label>Perfil</label>
+      <select [(ngModel)]="editando.perfil">
+        <option [value]="true">Admin</option>
+        <option [value]="false">Cliente</option>
+      </select>
+    </div>
+
+    <div class="actions">
+      <button class="btn-success" (click)="salvarEdicao()">Salvar</button>
+      <button class="btn-voltar" (click)="editando = null">Cancelar</button>
+    </div>
   </div>
 </div>

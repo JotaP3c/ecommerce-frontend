@@ -51,6 +51,6 @@ export class UserService {
   }
 
   criar(usuario: any): Observable<any> {
-  return this.http.post<any>(this.apiUrl, usuario, { headers: this.getHeaders() });
-}
+    return this.http.post<any>(this.apiUrl, usuario, { headers: this.getHeaders() });
+  }
 }

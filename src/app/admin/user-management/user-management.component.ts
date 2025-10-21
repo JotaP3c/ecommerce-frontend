@@ -86,4 +86,19 @@ export class UserManagementComponent implements OnInit {
       });
     }
   }
+
+  ativarUsuario(id: number) {
+  if (confirm('Deseja ativar este usuário?')) {
+    this.userService.ativar(id).subscribe({
+      next: () => {
+        alert('Usuário ativado com sucesso!');
+        this.listarTodos(); // atualiza a tabela
+      },
+      error: (err) => {
+        console.error('Erro ao ativar usuário:', err);
+        alert('Erro ao ativar usuário.');
+      }
+    });
+  }
+}
 }
