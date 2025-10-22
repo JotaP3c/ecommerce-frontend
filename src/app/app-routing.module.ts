@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -7,6 +7,7 @@ import { UserManagementComponent } from './admin/user-management/user-management
 import { CriarUsuarioComponent } from './admin/criar-usuario/criar-usuario.component';
 import { CriarProdutoComponent } from './admin/criar-produto/criar-produto.component';
 import { EditarProdutoComponent } from './admin/editar-produto/editar-produto.component'; // 👈 novo import
+import { DesativarProdutoComponent } from './admin/desativar-produto/desativar-produto.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'admin/usuarios/novo', component: CriarUsuarioComponent },
   { path: 'admin/criar-produto', component: CriarProdutoComponent },
   { path: 'admin/editar-produto', component: EditarProdutoComponent },
-
+  { path: 'admin/desativar-produto', component: DesativarProdutoComponent},
   { path: '**', redirectTo: '/home' }
 ];
 

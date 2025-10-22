@@ -20,12 +20,18 @@ ngOnInit(): void {
 
   this.carregarProdutos();
 }
-  carregarProdutos() {
-    this.produtoService.listarProdutos().subscribe({
-      next: (data) => this.produtos = data,
-      error: (err) => console.error('Erro ao buscar produtos:', err)
-    });
-  }
+  carregarProdutos(): void {
+  this.produtoService.listarProdutos().subscribe({
+    next: (data) => {
+      this.produtos = data.filter(produto => produto.ativo === true);
+    },
+    error: (err) => {
+      console.error('Erro ao listar produtos:', err);
+    }
+  });
+}
+
+  
 
   logout() {
     localStorage.clear();
@@ -42,5 +48,9 @@ ngOnInit(): void {
 
   irParaEditarProduto() {
     this.router.navigate(['/admin/editar-produto']);
+  }
+
+  irParaDesativarProduto(){
+    this.router.navigate(['/admin/desativar-produto'])
   }
 }

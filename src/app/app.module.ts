@@ -11,6 +11,7 @@ import { UserManagementComponent } from './admin/user-management/user-management
 import { CriarUsuarioComponent } from './admin/criar-usuario/criar-usuario.component';
 import { CriarProdutoComponent } from './admin/criar-produto/criar-produto.component';
 import { EditarProdutoComponent } from './admin/editar-produto/editar-produto.component';
+import { DesativarProdutoComponent } from './admin/desativar-produto/desativar-produto.component';
 
 
 
@@ -25,7 +26,8 @@ import { EditarProdutoComponent } from './admin/editar-produto/editar-produto.co
     UserManagementComponent,
     CriarUsuarioComponent,
     CriarProdutoComponent,
-    EditarProdutoComponent
+    EditarProdutoComponent,
+    DesativarProdutoComponent
   ],
   imports: [
     BrowserModule,

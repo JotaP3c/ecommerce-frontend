@@ -10,7 +10,6 @@ export class ProdutoService {
 
   constructor(private http: HttpClient) {}
 
-  // ✅ Método para incluir o token JWT no header
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
     return new HttpHeaders({
@@ -30,5 +29,12 @@ export class ProdutoService {
   atualizar(id: number, produto: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${id}`, produto, { headers: this.getHeaders() });
   }
-  
+
+  desativarProduto(id: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}/desativar`, {}, { headers: this.getHeaders() });
+  }
+
+  ativarProduto(id: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}/ativar`, {}, { headers: this.getHeaders() });
+  }
 }
