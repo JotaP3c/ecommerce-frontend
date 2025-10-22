@@ -1,32 +1,43 @@
-<div class="home-container">
-  <div class="header">
-    <h2>Catálogo de Produtos</h2>
-    <div class="actions">
-      <button class="logout-btn" (click)="logout()">Sair</button>
-    </div>
+<div class="header">
+  <h2>Catálogo de Produtos</h2>
+  <button class="sair" (click)="logout()">Sair</button>
+</div>
+
+<p class="welcome-text">
+  Bem-vindo, <strong>{{ nomeUsuario }}</strong>! Veja nossos produtos disponíveis:
+</p>
+
+<div class="admin-actions" *ngIf="isAdmin">
+  <!-- Campo de busca COM WRAPPER -->
+  <div class="search-container">
+    <input
+      type="text"
+      placeholder="🔍 Buscar produto por nome ou ID..."
+      [(ngModel)]="filtro"
+      (input)="filtrarProdutos()"
+      class="search-input"
+    />
+    <span class="search-icon">🔎</span>
   </div>
 
-  <p class="welcome-text">
-    Bem-vindo, {{ isAdmin ? 'administrador' : 'cliente' }}! Veja nossos produtos disponíveis:
-  </p>
-
-  <!-- Botões de administrador -->
-  <div class="admin-actions" *ngIf="isAdmin">
+  <!-- Linha de botões -->
+  <div class="buttons-row">
     <button class="btn" (click)="irParaCriarProduto()">Criar Produto</button>
     <button class="btn" (click)="irParaEditarProduto()">Editar Produto</button>
-    <button class="btn" (click)="irParaDesativarProduto()">Desativar</button>
+    <button class="btn" (click)="irParaDesativarProduto()">Ativar ou Desativar Produto</button>
     <button class="admin-btn" (click)="router.navigate(['/admin/usuarios'])">Gerenciar Usuários</button>
   </div>
+</div>
 
-  <div class="produtos-container" *ngIf="produtos.length > 0; else semProdutos">
-    <div class="produto-card" *ngFor="let p of produtos">
-      <h3>{{ p.nome }}</h3>
-      <p>{{ p.descricao || 'Descrição indisponível' }}</p>
-      <p class="preco">Preço: <strong>R$ {{ p.preco }}</strong></p>
-    </div>
+
+<div class="products-grid">
+  <div *ngFor="let produto of produtosFiltrados" class="product-card">
+    <h3>{{ produto.id }} - {{ produto.nome }}</h3>
+    <p>{{ produto.descricao || 'Descrição indisponível' }}</p>
+    <p><strong>Preço:</strong> R$ {{ produto.preco }}</p>
   </div>
 
-  <ng-template #semProdutos>
-    <p class="no-products">Nenhum produto disponível.</p>
-  </ng-template>
+  <div *ngIf="produtosFiltrados.length === 0" class="no-results">
+    <p> Nenhum produto encontrado.</p>
+  </div>
 </div>

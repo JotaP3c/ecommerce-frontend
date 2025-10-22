@@ -9,29 +9,41 @@ import { ProdutoService } from '../services/produto.service';
 })
 export class HomeComponent implements OnInit {
   produtos: any[] = [];
+  produtosFiltrados: any[] = [];
+  filtro: string = '';
   isAdmin: boolean = false;
+   nomeUsuario: string = '';
 
   constructor(private produtoService: ProdutoService, private router: Router) {}
 
-ngOnInit(): void {
-  const perfil = localStorage.getItem('perfil');
-  this.isAdmin = perfil === 'true';
-  console.log('Perfil admin?', this.isAdmin);
+  ngOnInit(): void {
+    const perfil = localStorage.getItem('perfil');
+    this.isAdmin = perfil === 'true';
+    console.log('Perfil admin?', this.isAdmin);
 
-  this.carregarProdutos();
-}
-  carregarProdutos(): void {
-  this.produtoService.listarProdutos().subscribe({
-    next: (data) => {
-      this.produtos = data.filter(produto => produto.ativo === true);
-    },
-    error: (err) => {
-      console.error('Erro ao listar produtos:', err);
-    }
-  });
-}
+    const nome = localStorage.getItem('nomeUsuario');
+    this.nomeUsuario = nome ? nome : 'Usuário';
 
-  
+    this.carregarProdutos();
+  }
+
+  carregarProdutos() {
+    this.produtoService.listarProdutos().subscribe({
+      next: (data) => {
+        this.produtos = data.filter((p: any) => p.ativo === true);
+        this.produtosFiltrados = [...this.produtos];
+      },
+      error: (err) => console.error('Erro ao buscar produtos:', err)
+    });
+  }
+
+  filtrarProdutos() {
+    const termo = this.filtro.toLowerCase();
+
+    this.produtosFiltrados = this.produtos.filter((produto) =>
+      produto.nome.toLowerCase().includes(termo) || produto.id.toString().includes(termo)
+    );
+  }
 
   logout() {
     localStorage.clear();
@@ -50,7 +62,7 @@ ngOnInit(): void {
     this.router.navigate(['/admin/editar-produto']);
   }
 
-  irParaDesativarProduto(){
-    this.router.navigate(['/admin/desativar-produto'])
+  irParaDesativarProduto() {
+    this.router.navigate(['/admin/desativar-produto']);
   }
 }

@@ -26,6 +26,7 @@ mensagemErro: string = '';
         localStorage.setItem('token', res.token);
         localStorage.setItem('nome', res.nome);
         localStorage.setItem('email', res.email);
+        localStorage.setItem('nomeUsuario', res.nome);
         localStorage.setItem('perfil', String(res.perfil));
         this.router.navigate(['/home']);
       },
