@@ -9,6 +9,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AdminComponent } from './admin/admin.component';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { CriarUsuarioComponent } from './admin/criar-usuario/criar-usuario.component';
+import { CriarProdutoComponent } from './admin/criar-produto/criar-produto.component';
+import { EditarProdutoComponent } from './admin/editar-produto/editar-produto.component';
+
 
 
 
@@ -21,6 +24,8 @@ import { CriarUsuarioComponent } from './admin/criar-usuario/criar-usuario.compo
     AdminComponent,
     UserManagementComponent,
     CriarUsuarioComponent,
+    CriarProdutoComponent,
+    EditarProdutoComponent
   ],
   imports: [
     BrowserModule,

@@ -35,4 +35,12 @@ ngOnInit(): void {
   irParaAdmin() {
     this.router.navigate(['/admin']);
   }
+
+  irParaCriarProduto() {
+    this.router.navigate(['/admin/criar-produto']);
+  }
+
+  irParaEditarProduto() {
+    this.router.navigate(['/admin/editar-produto']);
+  }
 }

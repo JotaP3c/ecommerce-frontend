@@ -12,8 +12,8 @@
 
   <!-- Botões de administrador -->
   <div class="admin-actions" *ngIf="isAdmin">
-    <button class="admin-btn" enabled>Criar Produto</button>
-    <button class="admin-btn" enabled>Editar Produto</button>
+    <button class="btn" (click)="irParaCriarProduto()">Criar Produto</button>
+    <button class="btn" (click)="irParaEditarProduto()">Editar Produto</button>
     <button class="admin-btn" enabled>Excluir Produto</button>
     <button class="admin-btn" (click)="router.navigate(['/admin/usuarios'])">Gerenciar Usuários</button>
   </div>

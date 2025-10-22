@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -10,7 +10,25 @@ export class ProdutoService {
 
   constructor(private http: HttpClient) {}
 
-  listarProdutos(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  // ✅ Método para incluir o token JWT no header
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
   }
+
+  listarProdutos(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl, { headers: this.getHeaders() });
+  }
+
+  criar(produto: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, produto, { headers: this.getHeaders() });
+  }
+
+  atualizar(id: number, produto: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, produto, { headers: this.getHeaders() });
+  }
+  
 }
