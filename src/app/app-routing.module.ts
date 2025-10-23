@@ -6,7 +6,7 @@ import { AdminComponent } from './admin/admin.component';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { CriarUsuarioComponent } from './admin/criar-usuario/criar-usuario.component';
 import { CriarProdutoComponent } from './admin/criar-produto/criar-produto.component';
-import { EditarProdutoComponent } from './admin/editar-produto/editar-produto.component'; // 👈 novo import
+import { EditarProdutoComponent } from './admin/editar-produto/editar-produto.component';
 import { DesativarProdutoComponent } from './admin/desativar-produto/desativar-produto.component';
 
 const routes: Routes = [

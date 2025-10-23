@@ -1,9 +1,10 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  height: auto; /* Permite rolagem vertical natural */
   background: radial-gradient(circle at 20% 20%, #0a0f1d, #111a2b 70%);
   overflow-x: hidden;
+  overflow-y: auto; /* 🔹 Ativa a barra de rolagem no canto direito */
 }
 
 :host {
@@ -15,6 +16,7 @@ html, body {
   padding: 40px 0;
 }
 
+/* ===== TÍTULO ===== */
 h2 {
   text-align: center;
   font-size: 2rem;
@@ -31,6 +33,7 @@ h2 {
   color: #cbd5e1;
 }
 
+/* ===== BOTÃO SAIR ===== */
 button.sair {
   background: linear-gradient(135deg, #00e0ff, #00bcd4);
   color: #0a0f1d;
@@ -50,6 +53,7 @@ button.sair:hover {
   background: linear-gradient(135deg, #00bcd4, #00e0ff);
 }
 
+/* ===== CONTAINER DE ADMIN ===== */
 .admin-actions {
   display: flex;
   flex-direction: column;
@@ -59,6 +63,7 @@ button.sair:hover {
   text-align: center;
 }
 
+/* ===== CAMPO DE BUSCA ===== */
 .search-container {
   position: relative;
   width: 400px;
@@ -100,20 +105,14 @@ button.sair:hover {
   opacity: 0.8;
 }
 
-.buttons-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-}
- 
+/* ===== BOTÕES ===== */
 .buttons-row {
   display: flex;
-  gap: 18px;                
+  gap: 18px;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;         
-  margin-top: 5px;          
+  flex-wrap: wrap;
+  margin-top: 5px;
 }
 
 .admin-actions .btn,
@@ -137,35 +136,17 @@ button.sair:hover {
   background: linear-gradient(135deg, #00bcd4, #00e0ff);
 }
 
-.admin-actions .btn,
-.admin-actions .admin-btn {
-  background: linear-gradient(135deg, #00e0ff, #00bcd4);
-  color: #0a0f1d;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 20px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 224, 255, 0.25);
-}
-
-.admin-actions .btn:hover,
-.admin-actions .admin-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0, 224, 255, 0.35);
-  background: linear-gradient(135deg, #00bcd4, #00e0ff);
-}
-
+/* ===== GRID DE PRODUTOS (SEM SCROLL INTERNO) ===== */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 25px;
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 2rem auto 4rem;
+  padding: 1rem;
 }
 
+/* ===== CARD ===== */
 .product-card {
   background: #0e2433;
   border-radius: 16px;
@@ -192,6 +173,22 @@ button.sair:hover {
   margin: 4px 0;
 }
 
+/* ===== ESTADOS ===== */
+.loading {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #00ffff;
+  font-style: italic;
+  padding: 10px;
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #ccc;
+}
+
+/* ===== RESPONSIVIDADE ===== */
 @media (max-width: 768px) {
   button.sair {
     right: 20px;
@@ -207,7 +204,7 @@ button.sair:hover {
     width: 90%;
   }
 
-  .buttons-container {
+  .buttons-row {
     flex-direction: column;
     align-items: center;
   }

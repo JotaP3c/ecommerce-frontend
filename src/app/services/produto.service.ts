@@ -22,6 +22,10 @@ export class ProdutoService {
     return this.http.get<any[]>(this.apiUrl, { headers: this.getHeaders() });
   }
 
+  listarPaginado(page: number, size: number, sortBy: string = 'id'): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}?page=${page}&size=${size}&sortBy=${sortBy}`);
+  }
+
   criar(produto: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, produto, { headers: this.getHeaders() });
   }

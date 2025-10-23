@@ -22,6 +22,10 @@ export class UserService {
     return this.http.get<any[]>(this.apiUrl, { headers: this.getHeaders() });
   }
 
+  listarPaginado(page: number, size: number, sortBy: string = 'id'): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}?page=${page}&size=${size}&sortBy=${sortBy}`);
+  }
+
   buscarPorNome(nome: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}?nome=${nome}`, { headers: this.getHeaders() });
   }

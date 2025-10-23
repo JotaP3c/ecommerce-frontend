@@ -8,7 +8,7 @@
 </p>
 
 <div class="admin-actions" *ngIf="isAdmin">
-  <!-- Campo de busca COM WRAPPER -->
+  <!-- Campo de busca -->
   <div class="search-container">
     <input
       type="text"
@@ -20,7 +20,7 @@
     <span class="search-icon">🔎</span>
   </div>
 
-  <!-- Linha de botões -->
+  <!-- Botões -->
   <div class="buttons-row">
     <button class="btn" (click)="irParaCriarProduto()">Criar Produto</button>
     <button class="btn" (click)="irParaEditarProduto()">Editar Produto</button>
@@ -29,7 +29,7 @@
   </div>
 </div>
 
-
+<!-- GRID DE PRODUTOS -->
 <div class="products-grid">
   <div *ngFor="let produto of produtosFiltrados" class="product-card">
     <h3>{{ produto.id }} - {{ produto.nome }}</h3>
@@ -37,7 +37,11 @@
     <p><strong>Preço:</strong> R$ {{ produto.preco }}</p>
   </div>
 
-  <div *ngIf="produtosFiltrados.length === 0" class="no-results">
-    <p> Nenhum produto encontrado.</p>
+  <div *ngIf="carregando && !fimDaLista" class="loading">
+    <p>Carregando mais produtos...</p>
+  </div>
+
+  <div *ngIf="produtosFiltrados.length === 0 && !carregando" class="no-results">
+    <p>Nenhum produto encontrado.</p>
   </div>
 </div>
