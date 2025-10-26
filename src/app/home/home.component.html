@@ -29,19 +29,22 @@
   </div>
 </div>
 
+
 <!-- GRID DE PRODUTOS -->
-<div class="products-grid">
-  <div *ngFor="let produto of produtosFiltrados" class="product-card">
-    <h3>{{ produto.id }} - {{ produto.nome }}</h3>
-    <p>{{ produto.descricao || 'Descrição indisponível' }}</p>
-    <p><strong>Preço:</strong> R$ {{ produto.preco }}</p>
-  </div>
+<div class="scroll-container">
+  <div class="products-grid">
+    <div *ngFor="let produto of produtosFiltrados" class="product-card">
+      <h3>{{ produto.id }} - {{ produto.nome }}</h3>
+      <p>{{ produto.descricao || 'Descrição indisponível' }}</p>
+      <p><strong>Preço:</strong> R$ {{ produto.preco }}</p>
+    </div>
 
-  <div *ngIf="carregando && !fimDaLista" class="loading">
-    <p>Carregando mais produtos...</p>
-  </div>
+    <div *ngIf="carregando && !fimDaLista" class="loading">
+      <p>Carregando mais produtos...</p>
+    </div>
 
-  <div *ngIf="produtosFiltrados.length === 0 && !carregando" class="no-results">
-    <p>Nenhum produto encontrado.</p>
+    <div *ngIf="produtosFiltrados.length === 0 && !carregando" class="no-results">
+      <p>Nenhum produto encontrado.</p>
+    </div>
   </div>
 </div>

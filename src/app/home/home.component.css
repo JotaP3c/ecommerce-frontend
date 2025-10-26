@@ -1,10 +1,10 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: auto; /* Permite rolagem vertical natural */
+  height: 100%;
+  overflow-y: scroll; /* 🔹 força o scroll global */
   background: radial-gradient(circle at 20% 20%, #0a0f1d, #111a2b 70%);
   overflow-x: hidden;
-  overflow-y: auto; /* 🔹 Ativa a barra de rolagem no canto direito */
 }
 
 :host {
@@ -209,3 +209,34 @@ button.sair:hover {
     align-items: center;
   }
 }
+
+/* ===== CONTAINER ROLÁVEL ===== */
+.scroll-container {
+  max-height: 70vh; /* define a altura visível da área rolável */
+  overflow-y: auto; /* ativa a barra de rolagem vertical */
+  overflow-x: hidden;
+  margin: 0 auto;
+  padding-right: 10px; /* espaço pro scrollbar */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #00e0ff #0e2433; /* Firefox */
+}
+
+/* Personaliza o scroll no Chrome */
+.scroll-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: #0e2433;
+  border-radius: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: #00e0ff;
+  border-radius: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #00bcd4;
+}
+

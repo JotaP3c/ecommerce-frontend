@@ -14,11 +14,20 @@ export class CriarProdutoComponent {
     preco: 0
   };
 
-  constructor(private produtoService: ProdutoService, private router: Router) {}
+   carregando = false; 
+
+
+  constructor(private produtoService: ProdutoService, private router: Router) {
+    
+  }
 
   criarProduto() {
-    if (!this.produto.nome || !this.produto.descricao || !this.produto.preco) {
-      alert('Preencha todos os campos!');
+    if (this.carregando) return; 
+    this.carregando = true;
+
+    if (!this.produto.nome || !this.produto.descricao || this.produto.preco <= 0) {
+      alert('Preencha todos os campos corretamente!');
+      this.carregando = false;
       return;
     }
 
@@ -26,10 +35,12 @@ export class CriarProdutoComponent {
       next: () => {
         alert('Produto criado com sucesso!');
         this.router.navigate(['/home']);
+        this.carregando = false;
       },
       error: (err) => {
         console.error('Erro ao criar produto:', err);
-        alert('Erro ao criar produto.');
+        alert(err.error || 'Erro ao criar produto.');
+        this.carregando = false;
       }
     });
   }

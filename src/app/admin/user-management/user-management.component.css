@@ -162,3 +162,34 @@ tr.inativo {
   border: 1px solid #00ffff;
 }
 
+/* ===== CONTAINER ROLÁVEL ===== */
+.scroll-container {
+  max-height: 70vh; /* define a altura visível da área rolável */
+  overflow-y: auto; /* ativa a barra de rolagem vertical */
+  overflow-x: hidden;
+  margin: 0 auto;
+  padding-right: 10px; /* espaço pro scrollbar */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #00e0ff #0e2433; /* Firefox */
+}
+
+/* Personaliza o scroll no Chrome */
+.scroll-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: #0e2433;
+  border-radius: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: #00e0ff;
+  border-radius: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #00bcd4;
+}
+
+

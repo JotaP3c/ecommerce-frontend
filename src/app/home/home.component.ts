@@ -28,16 +28,10 @@ export class HomeComponent implements OnInit {
     this.nomeUsuario = localStorage.getItem('nomeUsuario') || 'Usuário';
     this.carregarPagina();
   }
-
-  /** Escuta rolagem da janela (scroll global) */
-  @HostListener('window:scroll', [])
-  onWindowScroll(): void {
-    if (this.carregando || this.fimDaLista) return;
-
-    const posicaoAtual = (window.scrollY || document.documentElement.scrollTop) + window.innerHeight;
-    const alturaTotal = document.documentElement.scrollHeight;
-
-    if (posicaoAtual >= alturaTotal - 100) {
+ 
+  onScroll(event: any): void {
+    const element = event.target;
+    if (!this.carregando && !this.fimDaLista && element.scrollHeight - element.scrollTop <= element.clientHeight + 1) {
       this.carregarPagina();
     }
   }

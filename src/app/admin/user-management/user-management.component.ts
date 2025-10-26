@@ -26,21 +26,35 @@ export class UserManagementComponent implements OnInit {
   listarTodos(): void {
     if (this.carregando || this.fimDaLista) return;
     this.carregando = true;
-
+  
     this.userService.listarPaginado(this.page, this.size).subscribe({
       next: (dados) => {
-        if (dados.length === 0) {
+        // Evita null
+        if (!dados || dados.length === 0) {
           this.fimDaLista = true;
         } else {
-          this.usuarios = [...this.usuarios, ...dados];
-          this.page++;
+          // 🔹 Detecta repetição (última página repetida)
+          const idsNovos = dados.map((u) => u.id);
+          const idsExistentes = new Set(this.usuarios.map((u) => u.id));
+  
+          // Filtra apenas usuários realmente novos
+          const novos = dados.filter((u) => !idsExistentes.has(u.id));
+  
+          if (novos.length === 0) {
+            // 🔹 Se não há novos usuários, já chegou ao fim
+            this.fimDaLista = true;
+          } else {
+            this.usuarios = [...this.usuarios, ...novos];
+            this.page++;
+          }
         }
+  
         this.carregando = false;
       },
       error: (err) => {
         console.error('Erro ao carregar usuários', err);
         this.carregando = false;
-      }
+      },
     });
   }
 
