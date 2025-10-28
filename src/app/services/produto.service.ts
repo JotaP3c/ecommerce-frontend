@@ -1,23 +1,44 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ProdutoService {
-  private apiUrl = 'http://localhost:8080/produtos';
+/*
 
-  constructor(private http: HttpClient) {}
+  Quando usar em dev, usar em bloco, quando for usar no docker, usar o bloco debaixo.
 
-  private getHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token');
-    return new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    });
-  }
+  @Injectable({
+    providedIn: 'root'
+  })
 
+  export class ProdutoService {
+    private apiUrl = 'http://localhost:8080/produtos';
+
+    constructor(private http: HttpClient) {}
+
+    private getHeaders(): HttpHeaders {
+      const token = localStorage.getItem('token');
+      return new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      });
+    }
+
+*/
+  @Injectable({ providedIn: 'root' })
+  export class ProdutoService {
+    private base = environment.API_URL; 
+    private apiUrl = `${this.base}/produtos`;
+
+    constructor(private http: HttpClient) {}
+
+    private getHeaders(): HttpHeaders {
+      const token = localStorage.getItem('token');
+      return new HttpHeaders({
+        Authorization: token ? `Bearer ${token}` : '',
+        'Content-Type': 'application/json',
+      });
+    }
   listarProdutos(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl, { headers: this.getHeaders() });
   }
