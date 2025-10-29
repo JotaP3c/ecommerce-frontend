@@ -9,6 +9,7 @@ import { ProdutoService } from 'src/app/services/produto.service';
 })
 export class DesativarProdutoComponent implements OnInit {
   produtos: any[] = [];
+  carregando = false;
 
   constructor(private produtoService: ProdutoService, private router: Router) {}
 
@@ -16,17 +17,22 @@ export class DesativarProdutoComponent implements OnInit {
     this.listarProdutos();
   }
 
+  /** 🔹 Agora lista todos os produtos (ativos e inativos) */
   listarProdutos(): void {
-    this.produtoService.listarProdutos().subscribe({
+    this.carregando = true;
+    this.produtoService.listarTodosSemPaginacao().subscribe({
       next: (data) => {
-        this.produtos = data;
+        this.produtos = data.sort((a, b) => a.id - b.id); // ordena por ID ascendente
+        this.carregando = false;
       },
       error: (err) => {
         console.error('Erro ao listar produtos:', err);
+        this.carregando = false;
       }
     });
   }
 
+  /** 🔻 Desativa produto */
   desativarProduto(id: number): void {
     if (confirm('Tem certeza que deseja desativar este produto?')) {
       this.produtoService.desativarProduto(id).subscribe({
@@ -41,6 +47,7 @@ export class DesativarProdutoComponent implements OnInit {
     }
   }
 
+  /** 🔺 Ativa produto */
   ativarProduto(id: number): void {
     if (confirm('Tem certeza que deseja ativar este produto?')) {
       this.produtoService.ativarProduto(id).subscribe({

@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProdutoService } from '../services/produto.service';
 
@@ -15,9 +15,6 @@ export class HomeComponent implements OnInit {
 
   isAdmin = false;
   nomeUsuario = '';
-
-  page = 0;
-  size = 12;
   carregando = false;
   fimDaLista = false;
 
@@ -26,30 +23,18 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.isAdmin = localStorage.getItem('perfil') === 'true';
     this.nomeUsuario = localStorage.getItem('nomeUsuario') || 'Usuário';
-    this.carregarPagina();
-  }
- 
-  onScroll(event: any): void {
-    const element = event.target;
-    if (!this.carregando && !this.fimDaLista && element.scrollHeight - element.scrollTop <= element.clientHeight + 1) {
-      this.carregarPagina();
-    }
+    this.carregarProdutos();
   }
 
-  private carregarPagina(): void {
-    if (this.carregando || this.fimDaLista) return;
+  /** 🔹 Carrega TODOS os produtos ativos (sem paginação) */
+  private carregarProdutos(): void {
     this.carregando = true;
 
-    this.produtoService.listarPaginado(this.page, this.size, 'id').subscribe({
+    this.produtoService.listarTodosSemPaginacao().subscribe({
       next: (dados) => {
-        const ativos = (dados || []).filter((p: any) => p?.ativo === true);
-        if (ativos.length === 0) {
-          this.fimDaLista = true;
-        } else {
-          this.produtos = [...this.produtos, ...ativos];
-          this.aplicarFiltroAtual();
-          this.page++;
-        }
+        // Filtra apenas produtos ativos
+        this.produtos = (dados || []).filter((p: any) => p?.ativo === true);
+        this.aplicarFiltroAtual();
         this.carregando = false;
       },
       error: (err) => {

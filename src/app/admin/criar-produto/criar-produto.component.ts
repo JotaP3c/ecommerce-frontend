@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProdutoService } from 'src/app/services/produto.service';
+import { Produto } from 'src/app/models/produto.model'; 
 
 @Component({
   selector: 'app-criar-produto',
@@ -8,39 +9,62 @@ import { ProdutoService } from 'src/app/services/produto.service';
   styleUrls: ['./criar-produto.component.css']
 })
 export class CriarProdutoComponent {
-  produto = {
+  produto: Produto = { 
     nome: '',
     descricao: '',
     preco: 0
   };
 
-   carregando = false; 
+  carregando = false;
+  imagemSelecionada: File | null = null;
 
+  constructor(private produtoService: ProdutoService, private router: Router) {}
 
-  constructor(private produtoService: ProdutoService, private router: Router) {
-    
+  onFileSelected(event: any) {
+    this.imagemSelecionada = event.target.files[0];
   }
 
   criarProduto() {
-    if (this.carregando) return; 
-    this.carregando = true;
-
-    if (!this.produto.nome || !this.produto.descricao || this.produto.preco <= 0) {
-      alert('Preencha todos os campos corretamente!');
-      this.carregando = false;
+    if (!this.produto.nome || !this.produto.descricao || !this.produto.preco) {
+      alert('Preencha todos os campos!');
       return;
     }
 
+    if (!this.produto.nome || !this.produto.descricao || !this.produto.preco) {
+      alert('Preencha todos os campos!');
+      return;
+    }
+
+    if (this.produto.preco < 1) {
+      alert('O preço deve ser maior que zero.');
+      return;
+    }
+
+    if (this.imagemSelecionada) {
+      const formData = new FormData();
+      formData.append('file', this.imagemSelecionada);
+
+      this.produtoService.uploadImagem(formData).subscribe({
+        next: (res) => {
+          this.produto.imagemUrl = res.url;
+          this.salvarProduto();
+        },
+        error: () => alert('Erro ao fazer upload da imagem.')
+      });
+    } else {
+      this.salvarProduto();
+    }
+  }
+
+  salvarProduto() {
     this.produtoService.criar(this.produto).subscribe({
       next: () => {
         alert('Produto criado com sucesso!');
         this.router.navigate(['/home']);
-        this.carregando = false;
       },
       error: (err) => {
         console.error('Erro ao criar produto:', err);
-        alert(err.error || 'Erro ao criar produto.');
-        this.carregando = false;
+        alert('Erro ao criar produto.');
       }
     });
   }
