@@ -1,13 +1,10 @@
-# Etapa 1: Build do Angular
+# ===== build =====
 FROM node:20 AS build
 WORKDIR /app
+COPY package*.json ./
+RUN npm ci
 COPY . .
-RUN npm install -g @angular/cli
-RUN npm install
-RUN ng build --configuration production
+# se o projeto tem "ng": use npx
+RUN npx ng build --configuration=production
 
-# Etapa 2: Servir com NGINX
-FROM nginx:alpine
-COPY --from=build /app/dist/ecommerce-frontend /usr/share/nginx/html
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
