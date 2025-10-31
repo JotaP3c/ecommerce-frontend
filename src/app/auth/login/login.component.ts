@@ -13,14 +13,31 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onLogin() {
-    this.authService.login(this.email, this.senha).subscribe({
-      next: () => {
+mensagemErro: string = '';
+
+ onLogin() {
+    const user = {
+      username: this.email,
+      password: this.senha
+    };
+
+    this.authService.login(user).subscribe({
+      next: (res: any) => {
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('nome', res.nome);
+        localStorage.setItem('email', res.email);
+        localStorage.setItem('nomeUsuario', res.nome);
+        localStorage.setItem('perfil', String(res.perfil));
         this.router.navigate(['/home']);
       },
-      error: err => {
-        alert('Usuário ou senha inválidos.');
-        console.error(err);
+      error: (err) => {
+        console.error('Erro ao fazer login:', err);
+
+        if (err.error?.error === 'Usuário inativo!') {
+          this.mensagemErro = 'Usuário inativo! Entre em contato com o administrador.';
+        } else {
+          this.mensagemErro = 'Usuário ou senha inválidos!';
+        }
       }
     });
   }

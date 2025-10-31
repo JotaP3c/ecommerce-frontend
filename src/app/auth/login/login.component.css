@@ -1,0 +1,113 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: radial-gradient(circle at 20% 20%, #0a0f1d, #111a2b 70%);
+  overflow: hidden;
+}
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: radial-gradient(circle at 20% 20%, #0a0f1d, #111a2b 70%);
+  font-family: 'Poppins', sans-serif;
+  color: #e2e8f0;
+}
+
+/* ====== CONTAINER ====== */
+.login-container {
+  background: rgba(20, 25, 40, 0.9);
+  border-radius: 16px;
+  padding: 40px 50px;
+  box-shadow: 0 0 20px rgba(0, 224, 255, 0.1);
+  border: 1px solid rgba(0, 224, 255, 0.25);
+  text-align: center;
+  width: 360px;
+  transition: all 0.3s ease;
+}
+
+.login-container:hover {
+  box-shadow: 0 0 25px rgba(0, 224, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+/* ====== TÍTULO ====== */
+h2 {
+  color: #00e0ff;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  text-shadow: 0 0 10px rgba(0, 224, 255, 0.4);
+}
+
+/* ====== CAMPOS ====== */
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 224, 255, 0.4);
+  background: rgba(255, 255, 255, 0.05);
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  border-color: #00e0ff;
+  box-shadow: 0 0 8px rgba(0, 224, 255, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ====== BOTÃO ====== */
+button {
+  width: 100%;
+  background: linear-gradient(135deg, #00e0ff, #00bcd4);
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: 600;
+  color: #0a0f1d;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #00bcd4, #00e0ff);
+  transform: scale(1.03);
+  box-shadow: 0 0 15px rgba(0, 224, 255, 0.3);
+}
+
+/* ====== TEXTO INFORMATIVO ====== */
+p {
+  color: #94a3b8;
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
+p span {
+  color: #00e0ff;
+  cursor: pointer;
+}
+
+p span:hover {
+  text-decoration: underline;
+}
+
+/* ====== RESPONSIVIDADE ====== */
+@media (max-width: 420px) {
+  .login-container {
+    width: 90%;
+    padding: 30px 25px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}

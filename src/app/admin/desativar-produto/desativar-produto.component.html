@@ -1,0 +1,47 @@
+<div class="scroll-container">
+<div class="container">
+  <h2>Gerenciar Ativação de Produtos</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Preço</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let produto of produtos">
+        <td>{{ produto.id }}</td>
+        <td>{{ produto.nome }}</td>
+        <td>{{ produto.descricao }}</td>
+        <td>R$ {{ produto.preco }}</td>
+        <td>{{ produto.ativo ? 'Ativo' : 'Inativo' }}</td>
+        <td>
+          <button
+            *ngIf="produto.ativo"
+            class="btn danger"
+            (click)="desativarProduto(produto.id)"
+          >
+            Desativar
+          </button>
+          <button
+            *ngIf="!produto.ativo"
+            class="btn success"
+            (click)="ativarProduto(produto.id)"
+          >
+            Ativar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="actions">
+    <button class="btn-voltar" (click)="voltar()">Voltar</button>
+  </div>
+</div>
+</div>

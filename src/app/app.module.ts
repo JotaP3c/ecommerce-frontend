@@ -6,6 +6,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminComponent } from './admin/admin.component';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { CriarUsuarioComponent } from './admin/criar-usuario/criar-usuario.component';
+import { CriarProdutoComponent } from './admin/criar-produto/criar-produto.component';
+import { EditarProdutoComponent } from './admin/editar-produto/editar-produto.component';
+import { DesativarProdutoComponent } from './admin/desativar-produto/desativar-produto.component';
+
+
 
 
 
@@ -13,13 +21,19 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    AdminComponent,
+    UserManagementComponent,
+    CriarUsuarioComponent,
+    CriarProdutoComponent,
+    EditarProdutoComponent,
+    DesativarProdutoComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

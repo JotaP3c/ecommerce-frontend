@@ -1,4 +1,60 @@
-<h1>Bem-vindo!</h1>
-<p>Você está logado.</p>
+<div class="header">
+  <h2>Catálogo de Produtos</h2>
+  <button class="sair" (click)="logout()">Sair</button>
+</div>
 
-<button (click)="logout()">Sair</button>
+<p class="welcome-text">
+  Bem-vindo, <strong>{{ nomeUsuario }}</strong>! Veja nossos produtos disponíveis:
+</p>
+
+<div class="admin-actions" *ngIf="isAdmin">
+  <!-- Campo de busca -->
+  <div class="search-container">
+    <input
+      type="text"
+      placeholder="🔍 Buscar produto por nome ou ID..."
+      [(ngModel)]="filtro"
+      (input)="filtrarProdutos()"
+      class="search-input"
+    />
+    <span class="search-icon">🔎</span>
+  </div>
+
+  <!-- Botões -->
+  <div class="buttons-row">
+    <button class="btn" (click)="irParaCriarProduto()">Criar Produto</button>
+    <button class="btn" (click)="irParaEditarProduto()">Editar Produto</button>
+    <button class="btn" (click)="irParaDesativarProduto()">Ativar ou Desativar Produto</button>
+    <button class="admin-btn" (click)="router.navigate(['/admin/usuarios'])">Gerenciar Usuários</button>
+  </div>
+</div>
+
+<!-- GRID DE PRODUTOS -->
+<div class="scroll-container">
+  <div class="products-grid">
+    <div *ngFor="let produto of produtosFiltrados" class="product-card">
+      <h3>{{ produto.id }} - {{ produto.nome }}</h3>
+
+      <!-- 👇 Imagem do produto (se existir) -->
+      <div class="image-container" *ngIf="produto.imagemUrl">
+        <img
+          [src]="produto.imagemUrl"
+          alt="{{ produto.nome }}"
+          class="product-image"
+          (error)="onImageError($event)"
+        />
+      </div>
+
+      <p>{{ produto.descricao || 'Descrição indisponível' }}</p>
+      <p><strong>Preço:</strong> R$ {{ produto.preco }}</p>
+    </div>
+
+    <div *ngIf="carregando && !fimDaLista" class="loading">
+      <p>Carregando mais produtos...</p>
+    </div>
+
+    <div *ngIf="produtosFiltrados.length === 0 && !carregando" class="no-results">
+      <p>Nenhum produto encontrado.</p>
+    </div>
+  </div>
+</div>
